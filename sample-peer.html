@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sample · Filled Peer Scorecard result — Planaria People System guide</title>
+<style>
+:root{--canvas:#f7f7f8;--card:#fff;--ink:#17191d;--muted:#6b7280;--line:#e6e8eb;--kpi:#4f46e5;--peer:#0d9488;--peer-bg:#e9f6f4;--pip:#b45309;--lo:#e0603b;--mid:#e3a008;--mid-ink:#b45309;--hi:#2f9e7e;}
+@media (prefers-color-scheme: dark){:root{--canvas:#111214;--card:#1a1b1e;--ink:#eef0f2;--muted:#9aa1ab;--line:#2b2d31;--peer-bg:#122726;}}
+*{box-sizing:border-box}body{margin:0;background:var(--canvas);color:var(--ink);font-family:Inter,-apple-system,"Segoe UI",Roboto,system-ui,sans-serif}
+.wrap{max-width:900px;margin:0 auto;padding:26px 18px 80px}
+.tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:#c4381d;padding:5px 12px;border-radius:99px;margin-bottom:16px}
+.back{display:inline-block;margin-bottom:14px;font-size:13px;color:var(--muted);text-decoration:none}
+.back:hover{color:var(--ink)}
+.note{font-size:13px;color:var(--muted);max-width:70ch;margin:0 0 22px;line-height:1.6}
+/* peer_card.js was built for a light-only host page (peer_growth_view.html) and
+   some of its boxes (e.g. .track) use a hardcoded light background with inherited
+   text color. This page defines --ink/--muted for its own dark mode, which would
+   make that text invisible -- so the card is locked to its real, always-light
+   rendering here, same reasoning as sample-kpi.html. */
+.peercard{--canvas:#f7f7f8;--card:#fff;--ink:#17191d;--muted:#6b7280;--line:#e6e8eb;--peer:#0d9488;--peer-bg:#e9f6f4;--lo:#e0603b;--mid:#e3a008;--mid-ink:#b45309;--hi:#2f9e7e;color:#17191d}
+.doc{background:#fff;border:1px solid #e6e8eb;border-top:3px solid #0d9488;border-radius:14px;overflow:hidden}
+</style>
+<script src="assets/peer_card.js"></script>
+</head><body>
+<div class="wrap">
+  <a class="back" href="index.html">← Back to the guide</a>
+  <div class="tag">⚠ Sample data — not a real case</div>
+  <p class="note">This is the <b>pooled Peer Scorecard</b> a person's ratings roll up into once at least two peers have rated them in the same cycle — the same view that lives on their Peer list in ClickUp. Every name and score below is invented for illustration.</p>
+  <div class="peercard"><div class="doc" id="out"></div></div>
+</div>
+<script>
+function scoresFor(mean, n){
+  // Fabricate n individual 1-5 ratings that average close to `mean`, for a realistic distribution bar.
+  var base = Math.round(mean), out = [];
+  for (var i = 0; i < n; i++) out.push(Math.max(1, Math.min(5, base + (i % 2 === 0 ? 0 : (i % 4 === 1 ? 1 : -1)))));
+  return out;
+}
+var SAMPLE = {
+  ratee: "Jamie Rivera",
+  level: "senior",
+  cycle: "Q3 2026",
+  n: 4,
+  values: [
+    { name: "Growth Potential", scores: scoresFor(4.2, 4) },
+    { name: "Agility", scores: scoresFor(3.8, 4) },
+    { name: "Continuous Improvement", scores: scoresFor(4.0, 4) },
+    { name: "Teamwork", scores: scoresFor(4.5, 4) },
+    { name: "Knowledge Sharing", scores: scoresFor(4.3, 4) },
+    { name: "Conflict Resolution", scores: scoresFor(3.5, 4) },
+    { name: "Communication & Handoff", scores: scoresFor(4.0, 4) },
+    { name: "Visibility", scores: scoresFor(3.7, 4) },
+    { name: "Deep Dive", scores: scoresFor(4.1, 4) },
+    { name: "Accountability", scores: scoresFor(4.4, 4) },
+    { name: "Reliability & Deadlines", scores: scoresFor(3.9, 4) },
+    { name: "Fill-the-Gap Attitude", scores: scoresFor(4.0, 4) },
+    { name: "Quality of Work", scores: scoresFor(4.2, 4) },
+    { name: "Integrity", scores: scoresFor(4.6, 4) },
+    { name: "Earn Trust", scores: scoresFor(4.3, 4) }
+  ],
+  track_reco: { mg: 1, ic: 3, unsure: 0 },
+  pooled_strengths: [
+    "Re-cut the Aurora case study structure with zero help — best turnaround on the team this quarter.",
+    "Always the first to offer a second pair of eyes when someone's stuck on a cut.",
+    "Straight and calm in disagreements — never lets a note become personal."
+  ],
+  pooled_constructive: [
+    "Could flag at-risk deadlines earlier — one flag this quarter came in same-day instead of with a buffer.",
+    "Sync-check pass before delivery would catch the occasional slip under tight turnarounds."
+  ]
+};
+document.getElementById('out').innerHTML = window.PEERCARD.html(SAMPLE);
+var style = document.createElement('style');
+style.textContent = window.PEERCARD.css;
+document.head.appendChild(style);
+</script>
+</body></html>

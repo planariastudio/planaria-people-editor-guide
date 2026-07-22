@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sample · Filled KPI Scorecard result — Planaria People System guide</title>
+<style>
+:root{--canvas:#f7f7f8;--card:#fff;--ink:#17191d;--muted:#6b7280;--line:#e6e8eb;--kpi:#4f46e5;--peer:#0d9488;--pip:#b45309;--lo:#e0603b;--mid:#e3a008;--mid-ink:#b45309;--hi:#2f9e7e;--accent:var(--kpi);--accent-soft:#eef0fe;}
+@media (prefers-color-scheme: dark){:root{--canvas:#111214;--card:#1a1b1e;--ink:#eef0f2;--muted:#9aa1ab;--line:#2b2d31;--accent-soft:#20213a;}}
+*{box-sizing:border-box}body{margin:0;background:var(--canvas);color:var(--ink);font-family:Inter,-apple-system,"Segoe UI",Roboto,system-ui,sans-serif}
+.wrap{max-width:900px;margin:0 auto;padding:26px 18px 80px}
+.tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:#c4381d;padding:5px 12px;border-radius:99px;margin-bottom:16px}
+.back{display:inline-block;margin-bottom:14px;font-size:13px;color:var(--muted);text-decoration:none}
+.back:hover{color:var(--ink)}
+.note{font-size:13px;color:var(--muted);max-width:70ch;margin:0 0 22px;line-height:1.6}
+/* kpi_card.js was built for a light-only host page (kpi_result_card.html) and
+   falls back to var(--ink)/var(--muted) for text inside its light boxes. This
+   page defines those vars for its own dark mode, which broke the card's text
+   contrast -- so the card is locked to its real, always-light rendering here. */
+.kpicard{--canvas:#f7f7f8;--card:#fff;--ink:#17191d;--muted:#6b7280;--line:#e6e8eb;--kpi:#4f46e5;--lo:#e0603b;--mid:#e3a008;--hi:#2f9e7e;--accent-soft:#eef0fe;color:#17191d}
+</style>
+<script src="assets/kpi_card.js"></script>
+</head><body>
+<div class="wrap">
+  <a class="back" href="index.html">← Back to the guide</a>
+  <div class="tag">⚠ Sample data — not a real case</div>
+  <p class="note">This is what a <b>filed KPI result</b> looks like once a supervisor scores it — the exact document that lands on the person's KPI list in ClickUp as a PDF, and what you'll see if you open a real case link. Every name, score, and note below is invented for illustration.</p>
+  <div class="kpicard" id="out"></div>
+</div>
+<script>
+var SAMPLE = {
+  id: "KPI-2026-Q3-Jamie-Rivera-01",
+  editor: "Jamie Rivera",
+  level: "Senior",
+  quarter: "Q3 2026",
+  supervisor: "Alex Chen",
+  official_kpi: 3.8,
+  self_overall: 4.1,
+  categories: [
+    {
+      name: "1  Output Quality & Craft",
+      self: 4.2, spv: 3.9,
+      metrics: [
+        { metric: "Pacing & rhythm", self: 4, spv: 4, target: "Pacing holds on complex multi-thread edits with no direction",
+          self_actual: "Held pacing across all 6 multi-thread client edits this quarter with no supervisor notes on rhythm.",
+          spv_note: "Agreed — pacing was consistently strong, including under the Northwind rebrand deadline crunch." },
+        { metric: "Storytelling structure", self: 4, spv: 4, target: "Shapes structure on complex stories end to end, no structural intervention",
+          self_actual: "Re-cut the Aurora case study from a messy 40-minute interview into a clean 3-minute arc with no help.",
+          spv_note: "Strong. This was the best structural turnaround on the team this quarter." },
+        { metric: "Cut precision", self: 4, spv: 3, target: "Frame-clean on complex timelines; zero technical cut errors",
+          self_actual: "One sync slip caught by QC on the Vantage delivery, fixed before client saw it.",
+          spv_note: "Good overall, but that sync slip is the second one this quarter — flagging so it doesn't become a pattern." }
+      ]
+    },
+    {
+      name: "3  Speed & Turnaround",
+      self: 4.0, spv: 3.7,
+      metrics: [
+        { metric: "On-time delivery rate", self: 4, spv: 4, target: "At least 90% met, including on complex projects",
+          self_actual: "11 of 12 deadlines hit this quarter (92%). The one miss was flagged 3 days ahead.",
+          spv_note: "Matches my count. Good proactive flag on the one at-risk delivery." },
+        { metric: "Proactive deadline flagging", self: 4, spv: 3, target: "Flags risks 48h+ ahead across several projects",
+          self_actual: "Flagged the Vantage risk 3 days out; usually earlier on other projects.",
+          spv_note: "One flag came in same-day rather than 48h+ ahead — otherwise solid. Room to build in the buffer earlier." }
+      ]
+    }
+  ],
+  focus: [
+    { area: "Cut precision under deadline pressure", priority: "Medium", source: "supervisor",
+      why: "Two sync slips this quarter, both caught before client delivery but both under tight turnarounds.",
+      action: "Add a dedicated sync-check pass to the QC checklist before any delivery under a 48h turnaround.",
+      measure: "Zero sync errors reaching final QC next quarter." },
+    { area: "Own a junior mentee", priority: "Low", source: "self",
+      why: "Ready to start giving structured feedback, not just ad-hoc help.",
+      action: "Pair with one Jr editor for the quarter on structure reviews.",
+      measure: "Mentee's structural re-cut rate drops quarter over quarter." }
+  ]
+};
+document.getElementById('out').innerHTML = window.KPICARD.html(SAMPLE);
+var style = document.createElement('style');
+style.textContent = window.KPICARD.css;
+document.head.appendChild(style);
+</script>
+</body></html>

@@ -12,7 +12,7 @@
 .back:hover{color:var(--ink)}
 .note{font-size:13px;color:var(--muted);max-width:70ch;margin:0 0 22px;line-height:1.6}
 /* ===== everything below this line is a byte-faithful reproduction of pipReportHtml()
-   in worker/index.js -- the exact document ClickUp receives as a PDF when a PIP is
+   in worker/index.js -- the exact document posted to GoodDay as a PDF when a PIP is
    filed. Locked to light mode: that's what the real PDF always renders in. ===== */
 .doc{--ink2:#17191d;--muted2:#6b7280;--line2:#e6e8eb;--pip2:#b45309;--lo2:#e0603b;--mid2:#9ca3af;--hi2:#2f9e7e;
   background:#fff;color:var(--ink2);font-size:13px;line-height:1.5;border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:0 1px 2px rgba(0,0,0,.04)}
@@ -40,7 +40,7 @@
 <div class="wrap-outer">
   <a class="back" href="index.html">← Back to the guide</a>
   <div class="tag">⚠ Sample data — not a real case</div>
-  <p class="note">This is a byte-faithful reproduction of the actual filed PIP report — the exact PDF that attaches to a person's PIP task in ClickUp once a verdict is filed (see <code>pipReportHtml()</code> in <code>worker/index.js</code>). Every name, score, and note below is invented for illustration.</p>
+  <p class="note">This is a byte-faithful reproduction of the actual filed PIP report — the exact PDF that posts into a person's PIP task in GoodDay once a verdict is filed (see <code>pipReportHtml()</code> in <code>worker/index.js</code>). Every name, score, and note below is invented for illustration.</p>
 
   <div class="doc"><div class="in">
     <div class="head">
